@@ -8,7 +8,7 @@ interface VentaFromDB  {
 }
 
 interface Props {
-    ventas: VentaFromDB[]
+    ventas: Array<VentaFromDB>
 }
 
 const VentasList =({ ventas }: Props)=>{
