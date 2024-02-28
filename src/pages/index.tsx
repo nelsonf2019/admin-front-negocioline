@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import VentasList from "components/entiti/ventas/VentasList";
+import AuthHeader from "Y/hooks/AppHeader"
+
 
 const Home: NextPage =()=> {
   const {
@@ -23,12 +25,8 @@ const Home: NextPage =()=> {
   return (
     <Container mt={8}>
      
-       <Button
-        colorScheme='blue' 
-        mb={2}
-        onClick={()=>{
-                router.push("/login")
-            }}>Inicio</Button>
+    <AuthHeader />
+  
       <Card p={4}>
         <Heading>Mis ventas</Heading>
         {isLoading ? <Spinner /> : <VentasList ventas={ventas}/>}  

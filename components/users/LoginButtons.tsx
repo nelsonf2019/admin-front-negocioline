@@ -12,8 +12,9 @@ export const LoginButtons =()=>{
                         <Button
                             type="submit"
                             onClick={()=>{
-                         }}>Iniciar sesión</Button> <Button
-                        onClick={()=>{
+                         }}>Iniciar sesión</Button>
+                         <Button
+                            onClick={()=>{
                             const email = getValues("email")
                             axios.post(
                                 

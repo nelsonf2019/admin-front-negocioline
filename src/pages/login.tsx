@@ -24,6 +24,7 @@ import  Myforms  from "../../components/entiti/ui/form/Myforms"
 import MyInput  from "components/entiti/ui/input/MyInput";
 import { LoginButtons } from "components/users/LoginButtons";
 import { Login, LoginSchema } from "schema/AuthSchema";
+import { json } from "stream/consumers";
 
 const Login: NextPage =()=>{
    const router = useRouter()
@@ -36,6 +37,7 @@ const Login: NextPage =()=>{
                             { withCredentials: true }
                         )
                         .then(({data})=>{
+                            localStorage.setItem("user", JSON.stringify(data.data))//OBTIENE LA KOKIE DE GOOGLE
                             router.push("/")
                         })
                         .catch((error)=> console.log(error))
