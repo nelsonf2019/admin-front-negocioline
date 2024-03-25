@@ -25,8 +25,10 @@ import MyInput  from "components/entiti/ui/input/MyInput";
 import { LoginButtons } from "components/users/LoginButtons";
 import { Login, LoginSchema } from "schema/AuthSchema";
 import { json } from "stream/consumers";
+import useAuth from "Y/hooks/useAuth";
 
 const Login: NextPage =()=>{
+   const {user, setUser} = useAuth()
    const router = useRouter()
     //REGISTER TOMAS LOS DATOS Y GETVALUES LOS LEE
     const onSubmit=(data: Login)=>{
@@ -37,7 +39,9 @@ const Login: NextPage =()=>{
                             { withCredentials: true }
                         )
                         .then(({data})=>{
-                            localStorage.setItem("user", JSON.stringify(data.data))//OBTIENE LA KOKIE DE GOOGLE
+                            const tokenPayload = data.data
+                            localStorage.setItem("user", JSON.stringify(tokenPayload))//OBTIENE LA KOKIE DE GOOGLE
+                            setUser(tokenPayload)
                             router.push("/")
                         })
                         .catch((error)=> console.log(error))
@@ -45,6 +49,8 @@ const Login: NextPage =()=>{
     const onError = (errors: any) => {
         console.log({errors})
     }
+
+
     return(
         <Container marginTop={10}>
             <Heading textAlign={"center"}>Iniciar sesión</Heading>

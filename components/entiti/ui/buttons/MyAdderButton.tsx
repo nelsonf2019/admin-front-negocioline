@@ -11,8 +11,8 @@ interface Props{
 
 const MyAdderButton =({ fieldName }: Props)=>{
     const { control } = useFormContext()
-    const { append } = useFieldArray({control, name: fieldName, // unique name for your Field Array
-    });
+    const { append } = useFieldArray({control, name: fieldName,}); // unique name for your Field Array
+    
     console.log({append})
 
     const defaultValues = DEFAULT_VALUES[fieldName]

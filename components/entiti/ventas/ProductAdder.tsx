@@ -1,6 +1,6 @@
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { MySearchIcon } from "../ui/icon/MySearchIcon";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import MyInput from "../ui/input/MyInput";
 import MyDeleteIcon from "../ui/icon/MyDeleteIcon";
 import { Product, Sale } from "schema/SaleSchema";
@@ -29,7 +29,9 @@ function ProductAdder({ fieldName }: Props){
 
         }
      },[products])
-
+     if(!products || products.length === 0){
+        return <Text mb={5}>No se ha agregado ningún producto</Text>
+     }
     return(
         <Flex flexDir="column" mb={4}>
         {products.map((product:Product, index: number)=>

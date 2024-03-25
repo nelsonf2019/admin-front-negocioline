@@ -1,6 +1,8 @@
 import { 
     Button, 
-    Flex, 
+    Flex,
+    useDisclosure,
+    useModalContext, 
      } from "@chakra-ui/react";
 import axios from "axios";
 import { env } from "Y/env.mjs";
@@ -12,7 +14,8 @@ import { Client, ClientFormProps, ClientSchema, DOC_TYPES } from "schema/cliente
 
 
 
-const ClientForm =({clientId}: ClientFormProps)=>{
+const ClientForm =({clientId }: ClientFormProps)=>{
+     const { onClose } = useModalContext()
      const router = useRouter()
     const onSubmit = async(data: Client, reset: any)=>{
         const PARAMS = !!clientId ? `/${clientId}`: ""
@@ -25,8 +28,7 @@ const ClientForm =({clientId}: ClientFormProps)=>{
         },
        )
         reset()// nos permite resetear el formulario, limpiar los campos
-        console.log({res})
-        router.push("/clients")
+        onClose()
      }
      const onError =()=> console.log("error")
      const setDefaultValues = async ()=>{
@@ -58,14 +60,8 @@ const ClientForm =({clientId}: ClientFormProps)=>{
         
         <MyInput fieldName="document_value" label="Documento" mb={0}/> 
         </Flex>
-        <Button  colorScheme="purple" type="submit">
+        <Button  colorScheme="purple" type="submit" mb={2}>
                  {!!clientId ? "Guardar cambios" : "Crear"}
-        </Button>
-        <Button 
-           onClick={()=>{
-              router.back()
-           }}>
-           Vovler
         </Button>
     </Myforms>
  

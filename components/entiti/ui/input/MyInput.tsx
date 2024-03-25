@@ -17,7 +17,10 @@ function MyInput<T>({
     valueAsDate = false,
     searchFn = false 
     }: MyInputProps<T>){
-    const { getValues, formState: {errors}, register }  =  useFormContext()
+    const { getValues, 
+            formState: {errors}, 
+            register 
+          }  =  useFormContext()
     const handleSearch = ()=> {
         const fieldValues = getValues(fieldName as string)
         if(typeof searchFn === "function"){

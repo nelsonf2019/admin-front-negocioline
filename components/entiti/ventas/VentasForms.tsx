@@ -8,20 +8,20 @@ import {
 import axios from "axios";
 import { env } from "Y/env.mjs";
 import { useRouter } from "next/router";
-
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import {  PaymenMethod, Product, ProductForState, ProductFormProps, Sale, saleSchema } from "schema/SaleSchema";
+import {  ProductFormProps, Sale, saleSchema } from "schema/SaleSchema";
 import Myforms from "../ui/form/Myforms";
 import MyInput from "../ui/input/MyInput";
 import ProductAdder from "./ProductAdder";
 import PaymentMethodAdder from "./PaymentMethodAdder";
 import MyAdderButton from "../ui/buttons/MyAdderButton";
-import { DEFAULT_VALUES } from "constant";
 import SaleFormButtons from "./SaleFormButtons";
+import MyModal from "../ui/modals/MyModal";
+import ProductSearcher from "../products/ProductSearcher";
  
 
-const saleForm =({ saleId }: ProductFormProps)=>{
+const SaleForm =({ saleId }: ProductFormProps)=>{
     const [ totalAmount, setTotalAmount ] = useState(0)
     
     const [foundClient, setfoundClient,] = useState<{ 
@@ -50,8 +50,8 @@ const saleForm =({ saleId }: ProductFormProps)=>{
         if(!saleId) return {
             //si no hay saleId retornamos valores por defectos
                 operation_date: new Date(), 
-                payment_methods: [DEFAULT_VALUES["payment_method"] as PaymenMethod],
-                products:[DEFAULT_VALUES["products"] as PaymenMethod],
+                // payment_methods: [DEFAULT_VALUES["payment_method"] as PaymenMethod],
+                // products:[DEFAULT_VALUES["products"] as PaymenMethod],
             }  
         const { data } = await axios.get(
             `${env.NEXT_PUBLIC_BACKEND_BASE_URL}/ventas${saleId}`,
@@ -108,7 +108,12 @@ const saleForm =({ saleId }: ProductFormProps)=>{
             <Divider mb="3" mt="2" />
             <Flex alignItems="center" justifyContent={"space-between"} mt="1">
                 <Heading size="md">Forma de pago</Heading>
-                <MyAdderButton fieldName="payment_methods"/>
+                {/* <MyAdderButton fieldName="payment_methods"/> */}
+                <MyModal 
+                    title="Eligir productos" 
+                    buttonText="Agregar"
+                    size="xs"
+                > <ProductSearcher /> </MyModal>
             </Flex>
                     {/* //Metodo de pago */}
             <PaymentMethodAdder fieldName="payment_methods" />
@@ -118,4 +123,4 @@ const saleForm =({ saleId }: ProductFormProps)=>{
     )
 }
 
-export default saleForm;
+export default SaleForm;

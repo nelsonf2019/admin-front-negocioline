@@ -9,12 +9,11 @@ const queryClient = new QueryClient()
 const MyApp: AppType = ({ Component, pageProps }) => {
  return(
   <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-    <ChakraProvider>
-      <Component {...pageProps} />;
-    </ChakraProvider>
-
-  </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <Component {...pageProps} />;
+      </ChakraProvider>
+    </QueryClientProvider>
   </AuthProvider>
 
  )

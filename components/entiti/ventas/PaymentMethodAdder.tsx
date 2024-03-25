@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import MyInput from "../ui/input/MyInput";
 import MyDeleteIcon from "../ui/icon/MyDeleteIcon";
 import { PAYMENT_METHOD_TYPES, PaymenMethod, Sale, TIME_UNITS } from "schema/SaleSchema";
@@ -13,6 +13,9 @@ interface Props{
 function PaymentMethodAdder({fieldName}: Props){
     const { watch } = useFormContext()
     const paymentenMethods = watch(fieldName);
+    if(!paymentenMethods || paymentenMethods.length === 0 ){
+        return <Text mb={5}>No se ha agregado ningún método de pago</Text>
+     }
     return(
         <Flex flexDir="column" mb={4}>
         {paymentenMethods.map((_: PaymenMethod, index: number)=>

@@ -1,9 +1,9 @@
-import { AuthContext } from "components/entiti/ui/globarl/AuthProvider"
+import { AuthContext, IAuthContext } from "components/entiti/ui/globarl/AuthProvider"
 import { useContext } from "react"
 
 const useAuth =()=>{
     const context = useContext(AuthContext)
-    return context
+    return context as IAuthContext 
 }
 
 export default useAuth

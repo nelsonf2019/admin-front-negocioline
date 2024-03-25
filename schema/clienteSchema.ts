@@ -27,4 +27,6 @@ import { z } from "zod";
     export interface ClientFormProps{
         clientId?: string //lleva ? porque es opcional
     }
+
+
 export type Client = z.infer<typeof ClientSchema> //inferimos el tipo de datos
