@@ -1,12 +1,10 @@
 import { 
     Button, 
     Flex,
-    useDisclosure,
     useModalContext, 
      } from "@chakra-ui/react";
 import axios from "axios";
 import { env } from "Y/env.mjs";
-import { useRouter } from "next/router";
 import MyInput  from "../ui/input/MyInput"
 import Myforms from "../ui/form/Myforms";
 import MySelect from "../ui/selects/MySelect";
@@ -16,8 +14,8 @@ import { Client, ClientFormProps, ClientSchema, DOC_TYPES } from "schema/cliente
 
 const ClientForm =({clientId }: ClientFormProps)=>{
      const { onClose } = useModalContext()
-     const router = useRouter()
-    const onSubmit = async(data: Client, reset: any)=>{
+     
+    const onSubmit = async(data: Client, reset: any): Promise<any>=>{
         const PARAMS = !!clientId ? `/${clientId}`: ""
        //esto es para saber si editamos o creamos un NUEVO cliente
         const res = await axios(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients${PARAMS}`, 
@@ -27,6 +25,7 @@ const ClientForm =({clientId }: ClientFormProps)=>{
             withCredentials: true
         },
        )
+        console.log({res})
         reset()// nos permite resetear el formulario, limpiar los campos
         onClose()
      }

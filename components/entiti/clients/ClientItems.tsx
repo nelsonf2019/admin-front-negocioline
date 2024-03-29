@@ -1,5 +1,4 @@
 import { Card, Text } from "@chakra-ui/react";
-import { ProductFormDB } from "schema/ProducSchema";
 import { ClientFromDB } from "schema/clienteSchema";
 
 interface Props{
