@@ -25,7 +25,7 @@ const ClientForm =({clientId }: ClientFormProps)=>{
             withCredentials: true
         },
        )
-        console.log({res})
+    
         reset()// nos permite resetear el formulario, limpiar los campos
         onClose()
      }
