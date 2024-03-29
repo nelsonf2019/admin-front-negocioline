@@ -11,11 +11,10 @@ interface Props<T>{
     const { control } = useFormContext()
     const { remove } = useFieldArray({control, name:fieldName as string })    
     return(
-        <DeleteIcon 
-        mb={2} 
-        color={index > 0 ? "red.500" : "white"}  
-        _hover={{ color: index > 0 ? "red.700": "white", cursor:"pointer" }}
-        onClick={() => remove(index)} />
+        <DeleteIcon  
+             color={ "red.500" }  
+             _hover={{ color:"red.700", cursor:"pointer" }}
+            onClick={() => remove(index)} />
     )
 }
 

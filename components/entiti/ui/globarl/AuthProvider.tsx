@@ -21,7 +21,7 @@ const AuthProvider =({children}:{children:ReactNode})=>{
     const PROTECTED_ROUTES = ["/"]//ruta protejida
 
     const validateRoute = (user: TokenPayload)=>{
-        if(!user && PROTECTED_ROUTES.includes(router.pathname))//si el usario no esta en el estdo ni en el localStorage
+        if(!user && PROTECTED_ROUTES.includes(router.pathname))//si el usario no esta en el estado ni en el localStorage
         //debe sacarme a la página principal
         router.push("/login")
         if(!!user && router.pathname === "/login"){

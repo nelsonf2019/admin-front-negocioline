@@ -11,8 +11,7 @@ export const SalesPanel =()=>{
     return(
         <TabPanel p={0}>
             <VentasList />
-            <MyModal title="Nueva Venta" children={<SaleForm />} />       
-             {/* <Button colorScheme='green' onClick={()=>{ventas}}>Ventas</Button>         */}
+          
         </TabPanel>
       
       

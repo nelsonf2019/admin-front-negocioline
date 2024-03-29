@@ -1,28 +1,39 @@
-import { Box, Button, Flex, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, useModalContext } from "@chakra-ui/react";
 import ProductsList from "./ProductsList";
 import { useRef, useState } from "react";
 import { Search2Icon } from "@chakra-ui/icons";
 import { ProductFormDB } from "schema/ProducSchema";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import CalcProductPrice from "helpers/CalcProductsPrice";
 
 const ProductSearcher =()=>{
-    const { getValues, control } = useFormContext()
-    const { append } = useFieldArray({control, name: "product",}); // unique name for your Field Array
+    const { control } = useFormContext()
+    const { onClose } = useModalContext()//para cerrar el modal
+    const { append } = useFieldArray({control, name: "products",}); // unique name for your Field Array
     const [searchText, setSearchText] = useState<string | undefined>("")
     //al seleccionar el item de productos se va agregando a un arreglo
-    const [selectedProducts, seteSelectProduct] = useState<string[]>([])
+    const [selectedProducts, seteSelectProduct] = useState<ProductFormDB[]>([])
     const handleClick =(product: ProductFormDB)=>{
         console.log(product)
-        const alreadyIncluded = selectedProducts.includes(product._id)//incluimos los productos que tengan el id
+        const alreadyIncluded = selectedProducts.some(sp => sp._id === product._id)//incluimos los productos que tengan el id
         //preguntamos si existe ese id
         if(!alreadyIncluded){
-            seteSelectProduct([...selectedProducts, product._id])// va seteando, es decir va agregando el producto y caopiando los productos anteriores
+            seteSelectProduct([...selectedProducts, product])// va seteando, es decir va agregando el producto y caopiando los productos anteriores
         }else{
-            seteSelectProduct(selectedProducts.filter((prodId) => prodId !== product._id))
+            seteSelectProduct(selectedProducts.filter((prodId) => prodId._id !== product._id))
         }
     }
     const handleSelect =()=>{
         console.log({selectedProducts})
+        for(const product of selectedProducts){
+            
+            append({
+                name:product.name,
+                qty:1,
+                unit_price:CalcProductPrice(product)
+            })
+        }
+        onClose()
     }
     const inputRef = useRef<HTMLInputElement>(null)
     return (

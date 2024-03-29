@@ -98,26 +98,33 @@ const SaleForm =({ saleId }: ProductFormProps)=>{
                 type="date"
                 valueAsDate
              />
-            <Flex alignItems="center" justifyContent={"space-between"} mt="8">
+            <Flex alignItems="center" justifyContent="space-between" mt="8">
                     <Heading size="md">Productos</Heading>
                     <Heading size="md">Forma de pago</Heading>
-                <MyAdderButton fieldName="products" />
-            </Flex>
-            <Divider mb="3" mt="2" />
-            <ProductAdder fieldName="products"/>
-            <Divider mb="3" mt="2" />
-            <Flex alignItems="center" justifyContent={"space-between"} mt="1">
-                <Heading size="md">Forma de pago</Heading>
-                {/* <MyAdderButton fieldName="payment_methods"/> */}
+                {/* <MyAdderButton fieldName="products" /> */}
                 <MyModal 
                     title="Eligir productos" 
                     buttonText="Agregar"
                     size="xs"
-                > <ProductSearcher /> </MyModal>
+                > <ProductSearcher /> </MyModal> 
             </Flex>
-                    {/* //Metodo de pago */}
+            <Divider mb="1" mt="1" />
+            <ProductAdder fieldName="products"/>
+            <Divider mb="3" mt="2" />
+            <Flex alignItems="center" justifyContent="space-between" mt="1">
+                <Heading size="md">Forma de pago</Heading>
+                {/* <MyAdderButton fieldName="payment_methods"/> */}
+                {/* <MyModal 
+                    title="Eligir productos" 
+                    buttonText="Agregar"
+                    size="xs"
+                > <ProductSearcher /> </MyModal> */}
+            </Flex>
+            
             <PaymentMethodAdder fieldName="payment_methods" />
+           
             <SaleFormButtons saleId={saleId}/>
+                    {/* //Metodo de pago */}
         </Myforms>
         </>
     )

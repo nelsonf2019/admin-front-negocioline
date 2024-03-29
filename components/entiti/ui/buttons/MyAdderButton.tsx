@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { DEFAULT_VALUES } from "constant";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { ProductForState, Sale } from "schema/SaleSchema";
+import { Sale } from "schema/SaleSchema";
 
 interface Props{
     fieldName: keyof Sale

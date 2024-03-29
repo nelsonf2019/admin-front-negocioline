@@ -33,59 +33,30 @@ function ProductAdder({ fieldName }: Props){
         return <Text mb={5}>No se ha agregado ningún producto</Text>
      }
     return(
-        <Flex flexDir="column" mb={4}>
+        <Flex   
+            flexDir="column"
+            alignItems="flex-start">
         {products.map((product:Product, index: number)=>
-            <Flex gap={3} alignItems="flex-end">
-                <MyInput 
-                    fieldName={`products.${index}.code`} 
-                    label="Código" 
-                    showLabel={index === 0} 
-                    searchFn={ async (code)=>{
-                        console.log(code)
-                        if(!code) return alert("Tenes que poner un codgo")
-                        const { data } = await axios.get(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/products${code}`, 
-                        { withCredentials: true }
-                        )
-                       
-                        const product: Product = data.data
-                    // console.log({product})
-                        const { 
-                            supplier_cost, 
-                            micro, 
-                            iva, 
-                            profit_margin, 
-                            salvament_cost
-                        } = product
-                        const baseCost = micro + supplier_cost
-                        const minimumCost = baseCost / ( 1 -salvament_cost)
-                        const finalPrice = Number((minimumCost / ( 1- profit_margin)).toFixed(3))
-                    // console.log({ finalPrice })
-                        if(!!product){
-                        
-                            setValue(`products.${index}`, {
-                                code: code,
-                                name:product.name,
-                                qty:1,
-                                unit_price: finalPrice,
-                            })  
-                        }else{
-                            return alert("Tenes que poner un codgo")
-                        }
-                    //  console.log({ data })
-                    }}
-                />
-                <MyInput 
-                    fieldName={`products.${index}.name`} 
-                    label="Denominación" 
-                    showLabel={index === 0}
-                />            
-                <MyInput 
+            <Flex 
+                gap={3} 
+                alignItems="center" 
+                mb={2} 
+                justifyContent="space-between"
+                width="100%"
+                >      
+             <Text flex={6}>{product.name}</Text>    
+             <Flex alignItems="center" gap={2} flex={2}> {/*Nombre descriptivo del productoi */}
+                <MyInput  
+                
                     fieldName={`products.${index}.qty`} 
                     label="Cantidad" 
-                    showLabel={index === 0}
+                    mb={0}
+                    size="sm"
+                    showLabel={false}
                     valueAsNumber
                 />
-                <MyDeleteIcon<Sale> fieldName="products" index={index} />
+                <MyDeleteIcon<Sale> fieldName="products" index={index} />{/**ubicacion del incono del tachito */}
+             </Flex>
         </Flex>)}
         {/* <Button onClick={()=> addProduct(defaultProduct)}> Nuevo producto </Button> */}
     </Flex>

@@ -15,7 +15,8 @@ function MyInput<T>({
     showLabel= true,
     valueAsNumber= false,
     valueAsDate = false,
-    searchFn = false 
+    searchFn = false,
+    size
     }: MyInputProps<T>){
     const { getValues, 
             formState: {errors}, 
@@ -43,6 +44,7 @@ function MyInput<T>({
 
                   }
                       <Input 
+                        size={size}
                         type={type}
                         placeholder=
                          { placeholder || label}

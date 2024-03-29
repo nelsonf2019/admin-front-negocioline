@@ -9,7 +9,7 @@ import ProductItems from "./ProductItems"
 interface Props{
     searchText?: string | undefined
     onClick: (product: ProductFormDB)=> void
-    selectedProducts?: string[]
+    selectedProducts?: ProductFormDB[]
 }
 
 const ProductsList =({searchText, onClick, selectedProducts}:Props)=>{
@@ -43,7 +43,7 @@ const ProductsList =({searchText, onClick, selectedProducts}:Props)=>{
                 <ProductItems  
                     product={p}
                     onClick={onClick} 
-                    selected={selectedProducts?.includes(p._id)}
+                    selected={selectedProducts?.includes(p)}
                 />
             ))
         }

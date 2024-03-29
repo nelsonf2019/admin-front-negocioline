@@ -8,6 +8,8 @@ export interface MyInputProps<T>{//recibe un generico
     flex?: number
     type?: string
     showLabel?: boolean
+    size?: Sizes
     searchFn?: ((state:any) => void) | boolean
 }
-   
+
+export type Sizes = "xs" | "sm" | "md" | "lg"

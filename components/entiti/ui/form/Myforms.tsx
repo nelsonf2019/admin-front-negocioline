@@ -47,7 +47,7 @@ const Myforms =({ defaultValues = {},
                         onError)}>
                 {children}
              </form>
-             {/* <DevTool control={methods.control} /> set up the dev tool */}
+             <DevTool control={methods.control} /> set up the dev tool
         </FormProvider>
     )
 }

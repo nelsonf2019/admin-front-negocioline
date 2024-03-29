@@ -9,19 +9,29 @@ import {
     useDisclosure,
   } from '@chakra-ui/react'
 import { ReactNode } from 'react'
+import { Sizes } from 'schema/UiSchemas'
 
   interface Props{
     title: string
     buttonText?: string
-    size?: "xs" | "md"
-    children: ReactNode
+    size?: Sizes
+    children: ReactNode   
+    colorSchema?: string
+    mr?: number
+    disabledButton?: boolean
   }
                                                  //size valor por defecto "md"
-  const MyModal =({ title, children, buttonText, size="md"}: Props)=>{
+  const MyModal =({ title, children, buttonText, size="md", colorSchema="blue", mr=0, disabledButton}: Props)=>{
     const { isOpen, onOpen, onClose,  } = useDisclosure()
     return(
         <>
-        <Button size={size} colorScheme='green' onClick={onOpen}>
+        <Button 
+          size={size} 
+          colorScheme={colorSchema} 
+          onClick={onOpen} 
+          mr={mr} 
+          isDisabled={disabledButton}
+        >
             {buttonText || title}
         </Button>
           

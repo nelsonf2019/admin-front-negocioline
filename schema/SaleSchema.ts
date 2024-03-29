@@ -7,8 +7,8 @@ export const PAYMENT_METHOD_TYPES = [
     "tarjeta de debito",
     "cuenta corriente",
     "transferencia"
-
-] as const
+ 
+] as const 
 
 export const TIME_UNITS = z.enum(["Días","Meses","Año"])
 
