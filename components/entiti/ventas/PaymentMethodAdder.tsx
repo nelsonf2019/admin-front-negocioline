@@ -18,8 +18,8 @@ function PaymentMethodAdder({fieldName}: Props){
      }
     return(
         <Flex flexDir="column" mb={2} justifyContent="center">
-        {paymentenMethods.map((_: PaymenMethod, index: number)=>
-            <Flex gap={3} alignItems="flex-end" mb={2}>
+        {paymentenMethods.map((pm: PaymenMethod, index: number)=>
+            <Flex key={pm.method} gap={3} alignItems="flex-end" mb={2}>
                 <MySelect 
                     fieldName={`payment_methods.${index}.method`}
                     label="Método" 

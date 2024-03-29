@@ -20,7 +20,7 @@ const ClientsList =({onClick, selectedClientId}: Props)=>{
     useQuery<ClientFromDB[]>({queryKey:["clients"], queryFn: async ()=>{
     const res = await axios.get(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients`,
     {withCredentials:true})//para que nos permite pasar a traves de Credentials
-    return res.data.data //esta data es data de axios
+    return res?.data?.data //esta data es data de axios
     }})
     
     if(isLoading) return <Spinner />
