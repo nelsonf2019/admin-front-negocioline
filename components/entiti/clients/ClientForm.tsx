@@ -19,7 +19,7 @@ const ClientForm =({clientId }: ClientFormProps)=>{
         try {
             const PARAMS = !!clientId ? `/${clientId}`: ""
            //esto es para saber si editamos o creamos un NUEVO cliente
-            await axios(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients${PARAMS}`, 
+            await axios.get(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients${PARAMS}`, 
             {
                 method: !!clientId ? "PUT" : "POST",
                 data,
@@ -45,7 +45,7 @@ const ClientForm =({clientId }: ClientFormProps)=>{
             return data.data
             
         } catch (error) {
-            console.error("Error al enviar la solicitud:", error);
+          return  console.error("Error al enviar la solicitud:", error);
         }
        }
     return(
