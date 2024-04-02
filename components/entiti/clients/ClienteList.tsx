@@ -1,9 +1,9 @@
-import { Card, Flex, Spinner, Text } from "@chakra-ui/react";
+import {  Flex, Spinner, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "Y/env.mjs";
 import axios from "axios";
  
-import { useRouter } from "next/router";
+
 import { ClientFromDB } from "schema/clienteSchema";
 import ClientItems from "./ClientItems";
 
@@ -25,7 +25,7 @@ const ClientsList =({onClick, selectedClientId}: Props)=>{
     
     if(isLoading) return <Spinner />
     if(!clients) return  <Text mb={5}>No hay clientes para mostrar</Text>
-    const router = useRouter()
+   
     return(
         <Flex flexDirection="column"
         p={1}

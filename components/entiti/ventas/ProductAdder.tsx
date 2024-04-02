@@ -37,7 +37,8 @@ function ProductAdder({ fieldName }: Props){
             flexDir="column"
             alignItems="flex-start">
         {products.map((product:Product, index: number)=>
-            <Flex 
+            <Flex
+                key={product.code} 
                 gap={3} 
                 alignItems="center" 
                 mb={2} 

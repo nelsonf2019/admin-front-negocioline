@@ -25,7 +25,9 @@ export const ClientPanel =()=>{
             }
             }/>
         
-        <MyModal title="Nuevo Cliente" mr={2} children={<ClientForm />}/>
+        <MyModal title="Nuevo Cliente" mr={2}>
+                <ClientForm />
+        </MyModal>
         <MyModal title="Nueva venta" colorSchema="green" disabledButton={!selectedClient}>
                 <SaleForm />
         </MyModal>

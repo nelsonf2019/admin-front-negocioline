@@ -18,7 +18,7 @@ const ClientForm =({clientId }: ClientFormProps)=>{
     const onSubmit = async(data: Client, reset: any): Promise<any>=>{
         const PARAMS = !!clientId ? `/${clientId}`: ""
        //esto es para saber si editamos o creamos un NUEVO cliente
-        const res = await axios(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients${PARAMS}`, 
+        await axios(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients${PARAMS}`, 
         {
             method: !!clientId ? "PUT" : "POST",
             data,
@@ -27,11 +27,12 @@ const ClientForm =({clientId }: ClientFormProps)=>{
        )
     
         reset()// nos permite resetear el formulario, limpiar los campos
-        onClose()
+        onClose()   
      }
      const onError =()=> console.log("error")
+     const algo: string = "algo"
      const setDefaultValues = async ()=>{
-            if(!clientId) return {}
+            if(!clientId) return {algo}
             const { data } = await axios.get(
                 `${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients/${clientId}`,
                 {withCredentials: true}
