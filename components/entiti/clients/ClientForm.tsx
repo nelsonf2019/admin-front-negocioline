@@ -13,32 +13,40 @@ import { Client, ClientFormProps, ClientSchema, DOC_TYPES } from "schema/cliente
 
 
 const ClientForm =({clientId }: ClientFormProps)=>{
-     const { onClose } = useModalContext()
-     
+    const { onClose } = useModalContext()
+   
     const onSubmit = async(data: Client, reset: any): Promise<any>=>{
-        const PARAMS = !!clientId ? `/${clientId}`: ""
-       //esto es para saber si editamos o creamos un NUEVO cliente
-        await axios(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients${PARAMS}`, 
-        {
-            method: !!clientId ? "PUT" : "POST",
-            data,
-            withCredentials: true
-        },
-       )
-    
-        reset()// nos permite resetear el formulario, limpiar los campos
-        onClose()   
+        try {
+            const PARAMS = !!clientId ? `/${clientId}`: ""
+           //esto es para saber si editamos o creamos un NUEVO cliente
+            await axios(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients${PARAMS}`, 
+            {
+                method: !!clientId ? "PUT" : "POST",
+                data,
+                withCredentials: true
+            },
+           )
+        
+            reset()// nos permite resetear el formulario, limpiar los campos
+            onClose()   
+        } catch (error) {
+            console.error("Error al enviar la solicitud:", error);
+        }
      }
      const onError =()=> console.log("error")
-     const algo: string = "algo"
+     const algo = "algo"
      const setDefaultValues = async ()=>{
+        try {
             if(!clientId) return {algo}
             const { data } = await axios.get(
                 `${env.NEXT_PUBLIC_BACKEND_BASE_URL}/clients/${clientId}`,
                 {withCredentials: true}
             )
-        // console.log({data})
             return data.data
+            
+        } catch (error) {
+            console.error("Error al enviar la solicitud:", error);
+        }
        }
     return(
     <Myforms 
